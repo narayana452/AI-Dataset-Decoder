@@ -1,0 +1,4 @@
+# The website needs NO Python packages. Open index.html in any modern browser.
+# Optional, only if you also build a Jupyter Notebook version:
+numpy>=1.24
+matplotlib>=3.7

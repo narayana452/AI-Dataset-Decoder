@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Dataset One-Hot Encoder using Decoder Logic</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <h1>AI Dataset One-Hot Encoder using Decoder Logic</h1>
+  <p>EC2201 · Digital Logic · Decoder-based encoding of categorical data</p>
+</header>
+
+<main>
+
+  <!-- TWO INTRO CARDS -->
+  <section class="two-cards">
+    <article class="card">
+      <h2>Problem Statement</h2>
+      <p>
+        Design a software solution for the real-world scenario
+        <strong>"AI Dataset One-Hot Encoder using Decoder Logic"</strong>,
+        using the specified digital-system concept and reproducible synthetic data.
+      </p>
+      <p>
+        The solution must demonstrate the relevant EC2201 syllabus concept and
+        provide testable inputs, outputs and results.
+      </p>
+    </article>
+
+    <article class="card">
+      <h2>Software Solution</h2>
+      <p>
+        A practical software/simulation solution: a working
+        converter / encoder / decoder with test cases and a validation report.
+      </p>
+      <ol>
+        <li>Create category codes</li>
+        <li>Implement decoder</li>
+        <li>Generate one-hot vectors</li>
+        <li>Validate</li>
+        <li>Compare with standard encoding</li>
+      </ol>
+      <p class="small">Tools: Python, Jupyter, NumPy, Matplotlib, Logisim-evolution (optional)</p>
+    </article>
+  </section>
+
+  <!-- ASSUMPTIONS -->
+  <section class="panel">
+    <h2>Assumptions and Input Format</h2>
+    <ul>
+      <li>Categories are separated by commas or new lines; leading/trailing spaces are removed.</li>
+      <li>Category names are case-sensitive. Duplicates are merged (first occurrence wins).</li>
+      <li>Between 1 and 64 unique categories are supported.</li>
+      <li>Category <em>i</em> (order of first appearance) gets the binary code of <em>i</em> using n = max(1, ⌈log₂k⌉) bits.</li>
+      <li>A decoder with n inputs has 2ⁿ outputs. Only the first k outputs form the one-hot vector; the rest are unused lines.</li>
+      <li>Dataset values must be one of the defined categories, otherwise the row is reported as an error.</li>
+    </ul>
+  </section>
+
+  <!-- LIVE INPUT -->
+  <section class="panel">
+    <h2>Live Input</h2>
+    <div class="grid-2">
+      <div>
+        <label for="categories">Categories (comma or line separated)</label>
+        <textarea id="categories" rows="5">Red, Green, Blue, Yellow, Orange</textarea>
+      </div>
+      <div>
+        <label for="dataset">Dataset column (one value per line or comma)</label>
+        <textarea id="dataset" rows="5">Red
+Blue
+Orange
+Green
+Yellow
+Blue
+Red
+Green</textarea>
+      </div>
+    </div>
+
+    <div class="grid-2 fault-row">
+      <div>
+        <label for="faultType">Fault injection (optional)</label>
+        <select id="faultType">
+          <option value="none">No fault</option>
+          <option value="0">Stuck-at-0</option>
+          <option value="1">Stuck-at-1</option>
+        </select>
+      </div>
+      <div>
+        <label for="faultLine">Faulty output line (D index)</label>
+        <input type="number" id="faultLine" min="0" value="0">
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button id="encodeBtn">Encode Dataset</button>
+      <button id="sampleBtn" class="secondary">Load Sample</button>
+      <button id="csvBtn" class="secondary">Download CSV</button>
+    </div>
+    <p id="message" class="error"></p>
+  </section>
+
+  <!-- STEP 1 -->
+  <section class="panel">
+    <h2>Step 1 · Category Codes</h2>
+    <p id="codebookInfo" class="small"></p>
+    <div id="codebook" class="scroll"></div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="panel">
+    <h2>Step 2 · Decoder Truth Table</h2>
+    <div id="truth" class="scroll"></div>
+  </section>
+
+  <!-- INTERMEDIATE -->
+  <section class="panel">
+    <h2>Intermediate States (Gate Level)</h2>
+    <label for="traceSelect">Choose a category to trace</label>
+    <select id="traceSelect"></select>
+    <div id="trace" class="scroll"></div>
+  </section>
+
+  <!-- STEP 3 + 4 -->
+  <section class="panel">
+    <h2>Step 3 · One-Hot Vectors and Step 4 · Validation</h2>
+    <p id="datasetSummary" class="small"></p>
+    <div id="dataset-out" class="scroll"></div>
+  </section>
+
+  <!-- STEP 5 -->
+  <section class="panel">
+    <h2>Step 5 · Comparison with Standard Encoding</h2>
+    <div id="compare" class="scroll"></div>
+  </section>
+
+  <!-- TESTS -->
+  <section class="panel">
+    <h2>Validation Report · Test Cases</h2>
+    <div class="buttons"><button id="testBtn">Run All Tests</button></div>
+    <p id="testSummary" class="small"></p>
+    <div id="tests" class="scroll"></div>
+  </section>
+
+  <!-- LEARNING PLATFORM -->
+  <section class="center">
+    <a class="platform-btn" href="https://narayana452.github.io/encoder-decoder/"
+       target="_blank" rel="noopener">Students Learning Platform</a>
+  </section>
+
+</main>
+
+<footer>EC2201 · AI Dataset One-Hot Encoder using Decoder Logic</footer>
+
+<script src="decoder.js"></script>
+<script src="tests.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
